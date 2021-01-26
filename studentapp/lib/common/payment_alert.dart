@@ -133,27 +133,27 @@ void showPaymentDialog({BuildContext context, String message = ""}) {
         content: Container(
           padding: EdgeInsets.all(20),
           child: Text(
-            "We have noticed that your Payment is Pending!\nPlease Pay $regularCost to $payPhone from your registered mobile number (only) for monthly subscription! We will automatically redirect you to the Homepage after payment confirmation",
+            paymentText,
             style: TextStyle(fontSize: 22),
           ),
         ),
         actions: [
-          FlatButton(
-            child: Text(
-              "Logout",
-              style: TextStyle(color: Colors.red),
-            ),
-            onPressed: () async {
-              loaderDialog(context);
-              await logoutStudent();
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ),
-                (route) => false,
-              );
-            },
-          ),
+          // FlatButton(
+          //   child: Text(
+          //     "Logout",
+          //     style: TextStyle(color: Colors.red),
+          //   ),
+          //   onPressed: () async {
+          //     loaderDialog(context);
+          //     await logoutStudent();
+          //     Navigator.of(context).pushAndRemoveUntil(
+          //       MaterialPageRoute(
+          //         builder: (context) => LoginScreen(),
+          //       ),
+          //       (route) => false,
+          //     );
+          //   },
+          // ),
           FlatButton(
             child: Text(
               "Exit",
@@ -181,27 +181,27 @@ void showExpiredDialog(
         content: Container(
           padding: EdgeInsets.all(20),
           child: Text(
-            "According to our policy, after 6 months of use, the student account gets terminated\nPlease pay $accountReopeningCost to $payPhone from your registered mobile number (only) to recieve a new StudentID and use this account again!",
+            expiredText,
             style: TextStyle(fontSize: 22),
           ),
         ),
         actions: [
-          FlatButton(
-            child: Text(
-              "Logout",
-              style: TextStyle(color: Colors.red),
-            ),
-            onPressed: () async {
-              loaderDialog(context);
-              await logoutStudent();
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ),
-                (route) => false,
-              );
-            },
-          ),
+          // FlatButton(
+          //   child: Text(
+          //     "Logout",
+          //     style: TextStyle(color: Colors.red),
+          //   ),
+          //   onPressed: () async {
+          //     loaderDialog(context);
+          //     await logoutStudent();
+          //     Navigator.of(context).pushAndRemoveUntil(
+          //       MaterialPageRoute(
+          //         builder: (context) => LoginScreen(),
+          //       ),
+          //       (route) => false,
+          //     );
+          //   },
+          // ),
           FlatButton(
             child: Text(
               "Exit",

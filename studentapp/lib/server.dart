@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studentapp/common/loader.dart';
 import 'package:studentapp/common/payment_alert.dart';
 import 'package:studentapp/registration/login_screen.dart';
+import 'package:toast/toast.dart';
 
 Map currentStudent = {
   "session_key": null,
@@ -27,7 +28,7 @@ Map currentStudent = {
 Map<String, String> get authHeader =>
     {'Session-Key': currentStudent['session_key']};
 
-String serverURL = "https://busmanager.loca.lt";
+String serverURL = "https://busmanagerapi.herokuapp.com";
 
 startupSequence({
   BuildContext context,
@@ -60,10 +61,17 @@ startupSequence({
       } else {
         if (payStat[2] == 1) {
           //Account Lapsed
-          showExpiredDialog(context: context);
+          Toast.show("Logged Out. Your account has expired!", context);
+          // showExpiredDialog(context: context);
         } else {
-          showPaymentDialog(context: context);
+          Toast.show("Logged Out. Payment Pending", context);
+          // showPaymentDialog(context: context);
         }
+        //LogoutStudent and go to login page
+        logoutStudent();
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => loginPage),
+        );
       }
     } else {
       //InactiveSession => LoginPage

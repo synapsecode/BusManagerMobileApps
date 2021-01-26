@@ -28,7 +28,7 @@ Map currentDriver = {
 Map<String, String> get authHeader =>
     {'Session-Key': currentDriver['session_key']};
 
-String serverURL = "https://fdbdd1a51730.ngrok.io";
+String serverURL = "https://busmanagerapi.herokuapp.com";
 
 startupSequence({
   BuildContext context,

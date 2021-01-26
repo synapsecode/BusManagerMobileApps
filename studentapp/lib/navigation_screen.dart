@@ -134,8 +134,8 @@ class NavigationScreen extends StatelessWidget {
                               builder: (BuildContext context) =>
                                   AboutUsScreen()));
                     },
-                    child:
-                        buildNavigationButton(Icons.help, Colors.grey, "Help")),
+                    child: buildNavigationButton(
+                        Icons.help, Colors.grey, "FAQ and Help")),
               ],
             ),
           ],
