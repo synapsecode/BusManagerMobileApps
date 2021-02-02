@@ -133,6 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("CURRENTSTUDENT $currentStudent");
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

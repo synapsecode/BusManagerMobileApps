@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studentapp/common/loader.dart';
 import 'package:studentapp/common/payment_alert.dart';
+import 'package:studentapp/constants.dart';
 import 'package:studentapp/registration/login_screen.dart';
 import 'package:toast/toast.dart';
 
@@ -38,6 +39,12 @@ startupSequence({
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String sessionKey = prefs.getString('student_session_key') ?? null;
   String phone = prefs.getString('student_phone') ?? null;
+
+  print("Getting Warning Text");
+  await getWarningText();
+  // print(paymentText);
+  // print(expiredText);
+
   print("PREFS $sessionKey $phone");
   if (phone == null || sessionKey == null) {
     //First Time Usage => LoginPage
@@ -78,6 +85,20 @@ startupSequence({
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => loginPage),
       );
+    }
+  }
+}
+
+getWarningText() async {
+  final response = await http.get("$serverURL/get_text");
+  if (response.statusCode == 200) {
+    Map res = json.decode(response.body);
+    if (res['status'] == 200) {
+      paymentText =
+          res['pendingtext'] ?? "Payment Pending! Please Contact Admin & Pay";
+      expiredText =
+          res['expiredtext'] ?? "Account Expired! Please Contact Admin & Pay";
+      return true;
     }
   }
 }

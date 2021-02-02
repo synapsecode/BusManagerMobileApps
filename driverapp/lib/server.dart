@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toast/toast.dart';
 
 import 'common_widgets/loader.dart';
 
@@ -60,50 +61,62 @@ startupSequence({
           MaterialPageRoute(builder: (context) => homePage),
         );
       } else {
+        /*
+      	* Show Toast that not verified
+      	* logout
+      	*/
+        Toast.show('Logged Out. Account Not Verified', context);
+        await logoutDriver();
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => LoginScreen(),
+          ),
+          (route) => false,
+        );
         print("Driver not Verified");
-        showDialog(
-            context: context,
-            builder: (context) {
-              return NeoDialog(
-                topHeight: 120,
-                title: "Verification Pending!",
-                color: Colors.red,
-                content: Container(
-                  padding: EdgeInsets.all(20),
-                  child: Text(
-                    "We have noticed that your account has not yet been verified by the administrator. You cannot use the app as a driver until you have been verified. Please reopen the application after verification",
-                    style: TextStyle(fontSize: 22),
-                  ),
-                ),
-                actions: [
-                  FlatButton(
-                    child: Text(
-                      "Logout",
-                      style: TextStyle(color: Colors.red),
-                    ),
-                    onPressed: () async {
-                      loaderDialog(context);
-                      await logoutDriver();
-                      Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
-                        ),
-                        (route) => false,
-                      );
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(
-                      "Exit",
-                      style: TextStyle(color: Colors.red),
-                    ),
-                    onPressed: () {
-                      exit(0);
-                    },
-                  )
-                ],
-              );
-            });
+        // showDialog(
+        //     context: context,
+        //     builder: (context) {
+        //       return NeoDialog(
+        //         topHeight: 120,
+        //         title: "Verification Pending!",
+        //         color: Colors.red,
+        //         content: Container(
+        //           padding: EdgeInsets.all(20),
+        //           child: Text(
+        //             "We have noticed that your account has not yet been verified by the administrator. You cannot use the app as a driver until you have been verified. Please reopen the application after verification",
+        //             style: TextStyle(fontSize: 22),
+        //           ),
+        //         ),
+        //         actions: [
+        //           FlatButton(
+        //             child: Text(
+        //               "Logout",
+        //               style: TextStyle(color: Colors.red),
+        //             ),
+        //             onPressed: () async {
+        //               loaderDialog(context);
+        //               await logoutDriver();
+        //               Navigator.of(context).pushAndRemoveUntil(
+        //                 MaterialPageRoute(
+        //                   builder: (context) => LoginScreen(),
+        //                 ),
+        //                 (route) => false,
+        //               );
+        //             },
+        //           ),
+        //           FlatButton(
+        //             child: Text(
+        //               "Exit",
+        //               style: TextStyle(color: Colors.red),
+        //             ),
+        //             onPressed: () {
+        //               exit(0);
+        //             },
+        //           )
+        //         ],
+        //       );
+        //     });
       }
     } else {
       print("Inactive Session");

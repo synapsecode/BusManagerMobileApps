@@ -11,6 +11,7 @@ class MyDetailsPage extends StatefulWidget {
 class _MyDetailsPageState extends State<MyDetailsPage> {
   @override
   Widget build(BuildContext context) {
+    print("CURRENTSTUDENT $currentStudent");
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.yellow,

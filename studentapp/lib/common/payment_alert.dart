@@ -133,7 +133,7 @@ void showPaymentDialog({BuildContext context, String message = ""}) {
         content: Container(
           padding: EdgeInsets.all(20),
           child: Text(
-            paymentText,
+            paymentText ?? "Payment Pending",
             style: TextStyle(fontSize: 22),
           ),
         ),
@@ -181,7 +181,7 @@ void showExpiredDialog(
         content: Container(
           padding: EdgeInsets.all(20),
           child: Text(
-            expiredText,
+            expiredText ?? "Your Account has Expired",
             style: TextStyle(fontSize: 22),
           ),
         ),
