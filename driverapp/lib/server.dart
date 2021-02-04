@@ -29,7 +29,7 @@ Map currentDriver = {
 Map<String, String> get authHeader =>
     {'Session-Key': currentDriver['session_key']};
 
-String serverURL = "https://busmanagerapi.herokuapp.com";
+String serverURL = "http://192.46.212.7";
 
 startupSequence({
   BuildContext context,
